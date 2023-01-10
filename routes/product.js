@@ -179,6 +179,38 @@ router.put("/:id", (req, res) => {
     });
 });
 
+//update product image using put
+
+router.put("/uploadImage/:id", uploadOptions.single("image"), (req, res) => {
+  //used for multer
+  const fileImage = req.file;
+  if (!fileImage)
+    //ensuring image exists before proceeding
+    return res.status(400).send("images must be specified");
+  const fileName = req.file.filename;
+  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
+  //end of multer
+
+  Product.findByIdAndUpdate(
+    req.params.id,
+    {
+      image: `${basePath}${fileName}`,
+    },
+    { new: true }
+  )
+    .then((product) => {
+      if (!product) {
+        res.status(404).send("product not found");
+      } else {
+        res.status(200).send(product);
+      }
+    })
+    .catch((error) => {
+      res.status(500).send({ message: error });
+    });
+});
+
+
 //delete product
 router.delete("/:id", (req, res) => {
   Product.findByIdAndRemove(req.params.id)
