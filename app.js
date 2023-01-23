@@ -16,6 +16,8 @@ const productRouter = require("./routes/product");
 const usersRouter = require("./routes/user");
 const categoriesRouter = require("./routes/category");
 const ordersRouter = require("./routes/orders");
+const commentRouter = require("./routes/comments");
+
 
 //using  middlewares
 app.use(cors());
@@ -28,6 +30,8 @@ app.use(`/products`, productRouter);
 app.use(`/users`, usersRouter);
 app.use(`/categories`, categoriesRouter);
 app.use(`/orders`, ordersRouter);
+app.use(`/comments`, commentRouter);
+
 
 app.use((req, res, next) => {
   console.log("hello from middleware");
