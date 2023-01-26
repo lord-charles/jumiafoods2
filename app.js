@@ -18,7 +18,6 @@ const categoriesRouter = require("./routes/category");
 const ordersRouter = require("./routes/orders");
 const commentRouter = require("./routes/comments");
 
-
 //using  middlewares
 app.use(cors());
 app.options("*", cors());
@@ -31,7 +30,6 @@ app.use(`/users`, usersRouter);
 app.use(`/categories`, categoriesRouter);
 app.use(`/orders`, ordersRouter);
 app.use(`/comments`, commentRouter);
-
 
 app.use((req, res, next) => {
   console.log("hello from middleware");
@@ -59,3 +57,7 @@ var server = app.listen(PORT, () => {
   var port = server.address().port;
   console.log("Express backend is running on port" + PORT);
 });
+
+//exporting express api
+
+module.exports = app;
