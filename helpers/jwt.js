@@ -15,6 +15,7 @@ function authJwt() {
       { url: /\/categories(.*)/, methods: ["GET", "OPTIONS"] },
       "/users/login",
       "/users/register",
+       "/comments",
     ], // no need to secure log, register in api
   });
 }
