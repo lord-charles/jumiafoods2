@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
       success: false,
     });
   }
-  res.send(comments);
+  res.status(200).send(comments);
 });
 //post request
 router.post("/", async (req, res) => {
@@ -19,10 +19,12 @@ router.post("/", async (req, res) => {
   else {
     let comment = new Comments({
       message: req.body.message,
+      fullname: req.body.fullname,
+      username: req.body.username
     });
     comment = await comment.save();
     if (!comment) return res.status(500).send("comment cannot be created");
-    res.send(comment);
+    res.status(200).send(comment);
   }
 });
 
